@@ -23,8 +23,8 @@
 </header>
 
 <style lang="scss">
-@use '$lib/styles/tokens' as *;
 
+    @import '../styles/tokens';
 header {
   font-family: "PP Neue Montreal", system-ui, sans-serif;
   font-weight: 500;
@@ -70,7 +70,7 @@ nav {
   font-weight: 400;
 
   /* animated underline */
-  background-image: linear-gradient(currentColor, currentColor);
+  background-image: linear-gradient($orange-accent, $orange-accent);
   background-repeat: no-repeat;
   background-size: 0% 1px;
   background-position: 100% 100%;

@@ -19,7 +19,7 @@
 </footer>
 
 <style lang="scss">
-@use '$lib/styles/tokens' as *;
+@import '../styles/tokens';
 
 footer {
   padding: 2rem 2rem;
