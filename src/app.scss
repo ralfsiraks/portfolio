@@ -1,0 +1,31 @@
+@use '$lib/styles/tokens' as *;
+
+* { margin: 0; padding: 0; }
+::selection { background-color: #ff4324; color: $dark; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: black;
+  color: $off-white;
+  font-family: "PP Neue Montreal", system-ui, sans-serif;
+}
+
+main { flex: 1; }
+
+.title-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+h1 {
+    font-weight: 500;
+}
+
+h3 {
+    font-weight: 200;
+}
