@@ -1,14 +1,10 @@
 import adapter from '@sveltejs/adapter-static';
 
-/** @type {import('@sveltejs/kit').Config} */
 const config = {
   kit: {
-    adapter: adapter(),
-    prerender: {
-      entries: ['*'] // prerender all pages that have links
-    }
+    adapter: adapter(),           // no server adapter
+    prerender: { entries: ['*'] } // crawl links & export every reachable page
   }
 };
-
 
 export default config;
