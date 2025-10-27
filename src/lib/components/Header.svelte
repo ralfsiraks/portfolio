@@ -23,7 +23,6 @@
 </header>
 
 <style lang="scss">
-
 header {
   font-family: "PP Neue Montreal", system-ui, sans-serif;
   font-weight: 500;
