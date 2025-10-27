@@ -1,11 +1,26 @@
 import adapter from '@sveltejs/adapter-static';
-import preprocessor from 'svelte-preprocess';
+import path from 'path';
 const config = {
   kit: {
-    adapter: adapter(),           // no server adapter
-    prerender: { entries: ['*'] } // crawl links & export every reachable page
+    adapter: adapter(),
+    prerender: { entries: ['*'] }
   },
-  preprocess: preprocessor()
+  vite: {
+    resolve: {
+      alias: {
+        $lib: path.resolve('./src/lib')
+      }
+    },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern',
+          // ✅ This makes tokens available in every <style lang="scss">
+          additionalData: `@use "$lib/styles/tokens" as *;`
+        }
+      }
+    }
+  }
 };
 
 export default config;

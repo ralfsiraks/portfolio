@@ -19,7 +19,6 @@
 </footer>
 
 <style lang="scss">
-@import '../styles/tokens';
 
 footer {
   padding: 2rem 2rem;

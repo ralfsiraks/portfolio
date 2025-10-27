@@ -24,7 +24,6 @@
 
 <style lang="scss">
 
-    @import '../styles/tokens';
 header {
   font-family: "PP Neue Montreal", system-ui, sans-serif;
   font-weight: 500;
