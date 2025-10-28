@@ -62,13 +62,11 @@
 }
 
 .fade-in {
-  animation-name: fadeIn;
+  animation-name: fadeUp;
 }
 
 .fade-out {
-  animation-name: fadeOut;
+  animation-name: fadeDown;
 }
 
-@keyframes fadeIn  { from { opacity: 0 } to { opacity: 1 } }
-@keyframes fadeOut { from { opacity: 1 } to { opacity: 0 } }
 </style>

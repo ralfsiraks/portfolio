@@ -141,7 +141,7 @@
         aria-describedby="agree-error"
         required
       />
-      <span>I agree this demo form won’t actually send data.</span>
+      <span>This doesn't do anything, but you have to agree to this*</span>
     </label>
     {#if errors.agree}<p id="agree-error" class="error">{errors.agree}</p>{/if}
   </div>
@@ -180,6 +180,7 @@ h1 {
   border: 1px solid #2a2a2a;
   background: #131313;
   color: #e5e5e5;
+  animation: fadeUp 0.5s cubic-bezier(0.5, 0.05, 0.2, 1) forwards;
 }
 
 .success {
@@ -194,6 +195,7 @@ h1 {
   justify-content: center;
   align-items: center;
   gap: 1rem;
+  animation: fadeUp 0.5s cubic-bezier(0.5, 0.05, 0.2, 1) forwards;
 }
 
 .field {
@@ -291,16 +293,6 @@ textarea:focus {
   font-size: 0.9rem;
 }
 
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 /* mobile */
 @media (max-width: 720px) {

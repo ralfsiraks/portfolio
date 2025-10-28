@@ -2,6 +2,29 @@ $off-white: #E5E5E5;
 $dark: #0E0E0E;
 $orange-accent:#ff4c24;
 
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
 @font-face {
   font-family: "PP Neue Montreal";
   src: url("/fonts/ppneuemontreal-thin.otf") format("opentype");

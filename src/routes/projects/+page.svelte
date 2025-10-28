@@ -136,16 +136,6 @@ h1 {
   animation-delay: calc(var(--i, 0) * 70ms);
 }
 
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
 /* Respect reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
