@@ -1,30 +1,13 @@
 <script>
   import ProjectCard from '$lib/components/ProjectCard.svelte';
-  import projects from '$lib/data/projects.js';
   import Modal from '$lib/components/Modal.svelte';
-  import { page } from '$app/stores';
+  import projects from '$lib/data/projects.js';
 
-  let selected = $state(null);
+  let selected = null;
+  let open = false;
 
-  const open = (p) => {
-    selected = p;
-    const url = new URL($page.url);
-    url.searchParams.set('p', p.slug);
-    history.pushState({}, '', url);
-  };
-
-  const close = () => {
-    selected = null;
-    const url = new URL($page.url);
-    url.searchParams.delete('p');
-    history.pushState({}, '', url);
-  };
-
-  // Open modal if URL has ?p=...
-  $effect(() => {
-    const slug = $page.url.searchParams.get('p');
-    selected = projects.find((p) => p.slug === slug) ?? null;
-  });
+  const openModal = (p) => { selected = p; open = true; };
+  const closeModal = () => { open = false; };
 </script>
 
 <h1>Projects</h1>
@@ -34,22 +17,22 @@
     <div
       role="button"
       tabindex="0"
-      aria-label={`Open ${p.title} details`}
       style="cursor:pointer"
-      onclick={(e) => { e.preventDefault(); open(p); }}
+      onclick={(e) => { e.preventDefault(); openModal(p); }}
       onkeydown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          open(p);
+          openModal(p);
         }
       }}
+      aria-label={`Open ${p.title} details`}
     >
-      <ProjectCard {...p} href={`?p=${p.slug}`} />
+      <ProjectCard {...p} />
     </div>
   {/each}
 </div>
 
-<Modal open={!!selected} title={selected?.title} onClose={close}>
+<Modal {open} onClose={closeModal}>
   {#if selected}
     <img class="hero" src={selected.image} alt={selected.title} />
     <div class="content">
@@ -62,7 +45,7 @@
         </a>
       {/if}
 
-      <button class="close" onclick={close} aria-label="Close">Close</button>
+      <button class="close" onclick={closeModal}>Close</button>
     </div>
   {/if}
 </Modal>
@@ -84,31 +67,72 @@ h1 {
 }
 
 /* modal inner layout */
-.hero { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; user-select: none; }
-.content { padding: 1.5rem; display: grid; gap: .75rem; }
+.hero {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+}
+
+.content {
+  padding: 1.5rem;
+  display: grid;
+  gap: 0.75rem;
+}
 
 .visit {
-    display: inline-flex;  /* center content */
+  display: inline-flex;
   align-items: center;
-  justify-content: center; text-decoration: none; font-weight: 500;
-  padding: .6rem .9rem; border-radius: 10px; border: 1px solid #333;
-  background: #151515; color: #eaeaea;
-  transition: transform .5s cubic-bezier(0.5, 0.05, 0.2, 1), border-color .2s ease;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.6rem 0.9rem;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background: #151515;
+  color: #eaeaea;
+  transition:
+    transform 0.5s cubic-bezier(0.5, 0.05, 0.2, 1),
+    border-color 0.2s ease;
 }
-.visit:hover { transform: translateY(-2px); border-color: #444; }
+
+.visit:hover {
+  transform: translateY(-2px);
+  border-color: #444;
+}
 
 .close {
   cursor: pointer;
-  font-size: .8rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  justify-self: start; margin-top: .25rem; padding: .45rem 2rem;
-  background: transparent; color: #cfcfcf; border: 1px solid #333; border-radius: 10px;
-  transition: transform .3s cubic-bezier(0.5, 0.05, 0.2, 1), border-color .2s ease;
+  justify-self: start;
+  margin-top: 0.25rem;
+  padding: 0.45rem 2rem;
+  background: transparent;
+  color: #cfcfcf;
+  border: 1px solid #333;
+  border-radius: 10px;
+  transition:
+    transform 0.3s cubic-bezier(0.5, 0.05, 0.2, 1),
+    border-color 0.2s ease;
 }
-.close:hover { transform: translateY(-1px); border-color: #444; }
+
+.close:hover {
+  transform: translateY(-1px);
+  border-color: #444;
+}
 
 @media (min-width: 900px) {
-  :global(.modal .panel) { display: grid; grid-template-columns: 1fr 1fr; }
-  .hero { height: 100%; aspect-ratio: unset; }
+  :global(.modal .panel) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero {
+    height: 100%;
+    aspect-ratio: unset;
+  }
 }
+
 </style>
