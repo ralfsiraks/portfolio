@@ -7,7 +7,7 @@ const projects = [
       'Experimented with drawing primitives, animation loops, and interaction handling on the HTML5 Canvas. Focused on performance and input handling.',
     image: '/images/html_canvas_project.webp',
     tag: 'Frontend',
-    link: 'https://example.com/html-canvas'
+    link: 'https://htmlcanvasrs.netlify.app/'
   },
   {
     slug: 'artisan-store',
@@ -17,7 +17,7 @@ const projects = [
       'Product grid, detail pages, and a cart UI. Emphasis on clean layout, image optimization, and accessible forms.',
     image: '/images/artisan_project.webp',
     tag: 'E-Commerce',
-    link: 'https://example.com/artisan-store'
+    link: 'https://artisanstore.vercel.app/'
   },
   {
     slug: 'csgo-crypto',
@@ -27,7 +27,7 @@ const projects = [
       'Single-page marketing site with hero, feature sections, and CTA. Tuned for fast LCP and a strong visual identity.',
     image: '/images/csgo_landing_project.webp',
     tag: 'Landing Page',
-    link: 'https://example.com/csgo-crypto'
+    link: 'https://prakse2023-frontend.vercel.app/'
   },
   {
     slug: 'hangman',
@@ -37,7 +37,7 @@ const projects = [
       'Word selection, incorrect guess count, and SVG drawing stages. Focus on state management and keyboard input.',
     image: '/images/hangman_project.webp',
     tag: 'Frontend',
-    link: 'https://example.com/hangman'
+    link: 'https://hangman-ralfs.netlify.app/'
   },
   {
     slug: 'alcocalc',
@@ -47,7 +47,7 @@ const projects = [
       'Form validation, unit conversions, and responsive layout. Built to practice input UX and accessibility.',
     image: '/images/alcocalc_project.webp',
     tag: 'Tool',
-    link: 'https://example.com/alcocalc'
+    link: 'https://alkocalc.netlify.app/'
   },
   {
     slug: 'todo-angular',
@@ -57,7 +57,7 @@ const projects = [
       'CRUD tasks with local persistence and filters. Emphasis on component structure and state flow.',
     image: '/images/todo_angular_project.webp',
     tag: 'Frontend',
-    link: 'https://example.com/todo-angular'
+    link: 'https://ralfs-to-do-angular.vercel.app/'
   }
 ];
 
