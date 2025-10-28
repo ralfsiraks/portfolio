@@ -2,6 +2,13 @@
   import { page } from '$app/stores';
   $: path = $page.url.pathname.replace(/\/+$/, '') || '/';
   const isActive = (href) => (href === '/' ? path === '/' : path.startsWith(href));
+
+    function handleNav(e, href) {
+    if ($page.url.pathname === href) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
 </script>
 
 <header>
@@ -13,10 +20,10 @@
     </div>
     <div>
       <ul>
-        <li><a class="nav-link" class:is-active={isActive('/')} href="/">Home</a></li>
-        <li><a class="nav-link" class:is-active={isActive('/about')} href="/about">About me</a></li>
-        <li><a class="nav-link" class:is-active={isActive('/projects')} href="/projects">Projects</a></li>
-        <li><a class="nav-link" class:is-active={isActive('/contact')} href="/contact">Contact</a></li>
+        <li><a class="nav-link" class:is-active={isActive('/')} href="/" onclick={(e) => handleNav(e, '/')}>Home</a></li>
+        <li><a class="nav-link" class:is-active={isActive('/about')} href="/about" onclick={(e) => handleNav(e, '/about')}>About me</a></li>
+        <li><a class="nav-link" class:is-active={isActive('/projects')} href="/projects" onclick={(e) => handleNav(e, '/projects')}>Projects</a></li>
+        <li><a class="nav-link" class:is-active={isActive('/contact')} href="/contact" onclick={(e) => handleNav(e, '/contact')}>Contact</a></li>
       </ul>
     </div>
   </nav>
@@ -30,9 +37,13 @@ header {
   top: 0;
   z-index: 100;
   padding: 0.5rem 2rem;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
+  background: linear-gradient(
+  to bottom,
+  rgba(0, 0, 0, 1) 0%,   /* stronger opacity */
+  rgba(0, 0, 0, 0.70) 70%,  /* start easing out */
+  rgba(0, 0, 0, 0.30) 85%,  /* start easing out */
+  rgba(0, 0, 0, 0.00) 100%  /* fully transparent */
+);
 }
 
 .logo {

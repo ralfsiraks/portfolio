@@ -13,11 +13,12 @@
 <h1>Projects</h1>
 
 <div class="grid">
-  {#each projects as p}
+  {#each projects as p, i}
     <div
+      class="card"
+      style={`--i:${i}`}
       role="button"
       tabindex="0"
-      style="cursor:pointer"
       onclick={(e) => { e.preventDefault(); openModal(p); }}
       onkeydown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -32,6 +33,7 @@
   {/each}
 </div>
 
+
 <Modal {open} onClose={closeModal}>
   {#if selected}
     <img class="hero" src={selected.image} alt={selected.title} />
@@ -43,7 +45,7 @@
         <a class="visit" href={selected.link} target="_blank" rel="noopener noreferrer">
           Visit project ↗
         </a>
-      {/if}
+  {/if}
 
       <button class="close" onclick={closeModal}>Close</button>
     </div>
@@ -52,6 +54,7 @@
 
 <style lang="scss">
 h1 {
+  animation: fadeUp 0.5s cubic-bezier(0.5, 0.05, 0.2, 1) forwards;
   font-size: 3rem;
   font-weight: 400;
   text-transform: uppercase;
@@ -122,6 +125,37 @@ h1 {
   transform: translateY(-1px);
   border-color: #444;
 }
+
+
+.card {
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(14px);
+  animation:
+    fadeUp 0.5s cubic-bezier(0.5, 0.05, 0.2, 1) forwards;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 
 @media (min-width: 900px) {
   :global(.modal .panel) {
