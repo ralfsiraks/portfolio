@@ -1,305 +1,156 @@
 <script>
-  // Svelte 5 (runes) — JS only
-  const initial = () => ({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-    agree: false
-  });
-
-  let form = $state(initial());
-  let errors = $state({});
-  let sent = $state(false);
-
-  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-
-  function validateField(key, value) {
-    switch (key) {
-      case 'name':
-        return value.trim().length >= 2 ? '' : 'Name must be at least 2 characters.';
-      case 'email':
-        return EMAIL_RE.test(value.trim()) ? '' : 'Please enter a valid email address.';
-      case 'subject':
-        return value.trim().length >= 3 ? '' : 'Subject must be at least 3 characters.';
-      case 'message':
-        return value.trim().length >= 10 ? '' : 'Message must be at least 10 characters.';
-      case 'agree':
-        return value ? '' : 'Please confirm you agree to the terms.';
-      default:
-        return '';
-    }
-  }
-
-  function validateAll() {
-    const next = {};
-    for (const [k, v] of Object.entries(form)) {
-      const msg = validateField(k, v);
-      if (msg) next[k] = msg;
-    }
-    errors = next;
-    return Object.keys(next).length === 0;
-  }
-
-  function handleInput(key, value) {
-    form = { ...form, [key]: value };
-    // live-validate just this field
-    const msg = validateField(key, value);
-    errors = { ...errors, [key]: msg };
-  }
-
-  function onSubmit(e) {
-    e.preventDefault();
-    if (!validateAll()) return;
-    // Fake send
-    sent = true;
-      // reset form after “send”
-      form = initial();
-      errors = {};
-  }
+  // Edit these to your actual details
+  const EMAIL = 'it24075@lbtu.lv';
+  const PHONE = '+371 12345678';
+  const LOCATION_LABEL = 'Rīga, Latvia';
+  // Get your own embed URL from Google Maps → Share → Embed a map → Copy HTML (take the src)
+  const MAP_EMBED =
+    'https://www.google.com/maps?q=Riga%2C%20Latvia&output=embed';
 </script>
 
 <h1>CONTACT</h1>
 
-<div class="container">
-    {#if sent}
-      <p class="banner success" role="status">
-        Thanks! Your (pretend) message was submitted successfully. ✨
-      </p>
-    {/if}
-<form class="contactForm" onsubmit={onSubmit} novalidate>
-  <div class="field">
-    <label for="name">Name *</label>
-    <input
-      id="name"
-      name="name"
-      type="text"
-      placeholder="Your name"
-      value={form.name}
-      oninput={(e) => handleInput('name', e.currentTarget.value)}
-      aria-invalid={!!errors.name}
-      aria-describedby="name-error"
-      required
-    />
-    {#if errors.name}<p id="name-error" class="error">{errors.name}</p>{/if}
+<section class="contact-wrap">
+  <div class="info">
+
+    <dl class="list">
+      <div class="row">
+        <dt>E-mail</dt>
+        <dd><a href={`mailto:${EMAIL}`}>{EMAIL}</a></dd>
+      </div>
+
+      <div class="row">
+        <dt>Phone</dt>
+        <dd><a href={`tel:${PHONE.replace(/\s/g,'')}`}>{PHONE}</a></dd>
+      </div>
+
+      <div class="row">
+        <dt>Socials</dt>
+        <dd class="social">
+          <a href="https://github.com/ralfsiraks" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/ralfs-%C5%A1iraks-0aa02b289/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="/message">Message</a>
+        </dd>
+      </div>
+    </dl>
   </div>
 
-  <div class="field">
-    <label for="email">Email *</label>
-    <input
-      id="email"
-      name="email"
-      type="email"
-      placeholder="you@example.com"
-      value={form.email}
-      oninput={(e) => handleInput('email', e.currentTarget.value)}
-      aria-invalid={!!errors.email}
-      aria-describedby="email-error"
-      required
-    />
-    {#if errors.email}<p id="email-error" class="error">{errors.email}</p>{/if}
+  <div class="map">
+    <div class="map-card" aria-label={`Karte:`}>
+      <iframe
+        title={`Google Maps — Riga`}
+        src={MAP_EMBED}
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen
+      ></iframe>
+    </div>
   </div>
+</section>
 
-  <div class="field">
-    <label for="subject">Subject *</label>
-    <input
-      id="subject"
-      name="subject"
-      type="text"
-      placeholder="What’s this about?"
-      value={form.subject}
-      oninput={(e) => handleInput('subject', e.currentTarget.value)}
-      aria-invalid={!!errors.subject}
-      aria-describedby="subject-error"
-      required
-    />
-    {#if errors.subject}<p id="subject-error" class="error">{errors.subject}</p>{/if}
-  </div>
-
-  <div class="field">
-    <label for="message">Message *</label>
-    <textarea
-      id="message"
-      name="message"
-      rows="6"
-      placeholder="Tell me a bit about your project..."
-      oninput={(e) => handleInput('message', e.currentTarget.value)}
-      aria-invalid={!!errors.message}
-      aria-describedby="message-error"
-      required
-    >{form.message}</textarea>
-    {#if errors.message}<p id="message-error" class="error">{errors.message}</p>{/if}
-  </div>
-
-  <div class="check">
-    <label class="checkbox">
-      <input
-        type="checkbox"
-        checked={form.agree}
-        onchange={(e) => handleInput('agree', e.currentTarget.checked)}
-        aria-invalid={!!errors.agree}
-        aria-describedby="agree-error"
-        required
-      />
-      <span>This doesn't do anything, but you have to agree to this*</span>
-    </label>
-    {#if errors.agree}<p id="agree-error" class="error">{errors.agree}</p>{/if}
-  </div>
-
-  <div class="actions">
-    <button type="submit" class="submit">Send message</button>
-    <p class="hint">* Required fields</p>
-  </div>
-</form>
-</div>
 <style lang="scss">
 
+/* Page title */
 h1 {
-  animation: fadeUp 0.5s cubic-bezier(0.5, 0.05, 0.2, 1) forwards;
   font-size: 3rem;
   font-weight: 400;
   text-transform: uppercase;
   text-align: center;
-  margin: 3rem 0;
+  margin: 3rem 0 1.5rem;
+  animation: fadeUp .5s cubic-bezier(.5,.05,.2,1) both;
 }
 
-.container {
-  width: 100%;
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+/* Layout */
+.contact-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto 4rem;
+  padding: 0 1.25rem;
 }
 
-.banner {
-  width: 40%;
-  text-align: center;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  border-radius: 10px;
-  border: 1px solid #2a2a2a;
-  background: #131313;
-  color: #e5e5e5;
-  animation: fadeUp 0.5s cubic-bezier(0.5, 0.05, 0.2, 1) forwards;
+/* Info block */
+.info {
+  animation: fadeUp .5s cubic-bezier(.5,.05,.2,1) .06s both;
 }
 
-.success {
-  border-color: #2e7d32;
-  background: #102315;
+.list {
+  display: grid;
+  gap: .85rem;
+  margin-top: .5rem;
 }
 
-.contactForm {
-  width: 40%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  align-items: baseline;
   gap: 1rem;
-  animation: fadeUp 0.5s cubic-bezier(0.5, 0.05, 0.2, 1) forwards;
 }
 
-.field {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: .5rem;
-}
-
-label {
-  font-size: 0.95rem;
+dt {
   color: #cfcfcf;
-}
-
-textarea {
-  min-height: 50px;
-  min-width: 300px;
-}
-
-input,
-textarea {
-  width: 100%;
-  font: inherit;
-  color: #e5e5e5;
-  background: #0f0f0f;
-  border: 1px solid #2a2a2a;
-  border-radius: 10px;
-  padding: .8rem;
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-input::placeholder,
-textarea::placeholder {
-  color: #7a7a7a;
-}
-
-input:focus,
-textarea:focus {
-  border-color: $orange-accent; /* $orange-accent if tokens are global */
-  box-shadow: 0 0 0 3px rgba(255, 76, 36, 0.15);
-}
-
-.error {
-  margin: -0.2rem 0 0;
-  font-size: 0.85rem;
-  color: #ff6b6b;
-}
-
-.checkbox {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  user-select: none;
-}
-
-.checkbox input {
-  width: 18px;
-  height: 18px;
-  accent-color: #ff4c24;
-  cursor: pointer;
-}
-
-.actions {
-  grid-column: 1 / -1;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 0.5rem;
-}
-
-.submit {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.7rem 1.1rem;
-  border-radius: 10px;
-  border: 1px solid #333;
-  background: #151515;
-  color: #eaeaea;
   font-weight: 600;
-  cursor: pointer;
-  transition:
-    transform 0.25s cubic-bezier(0.5, 0.05, 0.2, 1),
-    border-color 0.2s ease;
 }
 
-.submit:hover {
-  transform: translateY(-1px);
-  border-color: #444;
+dd {
+  margin: 0;
+  color: #e5e5e5;
 }
 
-.hint {
-  color: #9a9a9a;
-  font-size: 0.9rem;
+a {
+  color: inherit;
+  text-decoration: none;
+  background-image: linear-gradient($orange-accent, $orange-accent);
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  transition: background-size .35s cubic-bezier(.5,.05,.2,1);
+}
+a:hover { background-size: 100% 1px; }
+
+.social {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: .75rem 1rem;
 }
 
+/* Map block */
+.map {
+  animation: fadeUp .5s cubic-bezier(.5,.05,.2,1) .12s both;
+}
 
-/* mobile */
-@media (max-width: 720px) {
-  .contactForm {
-    grid-template-columns: 1fr;
-    margin: 1.25rem;
-    gap: 1rem;
-  }
+.map-card {
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+.map-card iframe {
+  display: block;
+  width: 100%;
+  height: 420px;
+  border: 0;
+  filter: saturate(.95) contrast(1.05);
+  /* optional: rounded corners already handled by container */
+}
+
+/* FadeUp keyframes (or use your global in tokens) */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .contact-wrap { grid-template-columns: 1fr; }
+  .map-card iframe { height: 360px; }
+  .row { grid-template-columns: 120px 1fr; }
+}
+@media (max-width: 560px) {
+  .row { grid-template-columns: 100px 1fr; }
+  .map-card iframe { height: 300px; }
 }
 </style>

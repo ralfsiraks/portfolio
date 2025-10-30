@@ -23,6 +23,7 @@
         <li><a class="nav-link" class:is-active={isActive('/')} href="/" onclick={(e) => handleNav(e, '/')}>Home</a></li>
         <li><a class="nav-link" class:is-active={isActive('/about')} href="/about" onclick={(e) => handleNav(e, '/about')}>About me</a></li>
         <li><a class="nav-link" class:is-active={isActive('/projects')} href="/projects" onclick={(e) => handleNav(e, '/projects')}>Projects</a></li>
+        <li><a class="nav-link" class:is-active={isActive('/message')} href="/message" onclick={(e) => handleNav(e, '/message')}>Get In Touch</a></li>
         <li><a class="nav-link" class:is-active={isActive('/contact')} href="/contact" onclick={(e) => handleNav(e, '/contact')}>Contact</a></li>
       </ul>
     </div>
@@ -32,7 +33,6 @@
 <style lang="scss">
 header {
   font-family: "PP Neue Montreal", system-ui, sans-serif;
-  font-weight: 500;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -77,6 +77,7 @@ nav {
   padding-bottom: 4px;
   font-size: 1.5rem;
   font-weight: 400;
+  text-wrap: nowrap;
 
   /* animated underline */
   background-image: linear-gradient($orange-accent, $orange-accent);
