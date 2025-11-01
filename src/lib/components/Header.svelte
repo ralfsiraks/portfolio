@@ -23,6 +23,7 @@
         <li><a class="nav-link" class:is-active={isActive('/')} href="/" onclick={(e) => handleNav(e, '/')}>Home</a></li>
         <li><a class="nav-link" class:is-active={isActive('/about')} href="/about" onclick={(e) => handleNav(e, '/about')}>About me</a></li>
         <li><a class="nav-link" class:is-active={isActive('/projects')} href="/projects" onclick={(e) => handleNav(e, '/projects')}>Projects</a></li>
+        <li><a class="nav-link" class:is-active={isActive('/blog')} href="/blog" onclick={(e) => handleNav(e, '/blog')}>Blog</a></li>
         <li><a class="nav-link" class:is-active={isActive('/message')} href="/message" onclick={(e) => handleNav(e, '/message')}>Get In Touch</a></li>
         <li><a class="nav-link" class:is-active={isActive('/contact')} href="/contact" onclick={(e) => handleNav(e, '/contact')}>Contact</a></li>
       </ul>
