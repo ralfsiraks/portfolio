@@ -107,4 +107,11 @@ nav {
     background-position: 0 100%;
   }
 }
+
+
+@media (max-width: $bp-lg) {
+  header{
+    max-width: 100vw;
+  }
+}
 </style>

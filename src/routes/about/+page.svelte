@@ -45,7 +45,7 @@
     );
     position: relative;
     top: 10%;
-    height: calc(80%);
+    height: 80%;
   }
 
   .left {
@@ -119,6 +119,13 @@
       color: #cfcfcf;
       background: #141414;
       list-style: none;
+    }
+  }
+
+  @media (max-width: 402px) {
+    .rail {
+      top: 11%;
+      height: 80%;
     }
   }
 
