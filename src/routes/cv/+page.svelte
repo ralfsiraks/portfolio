@@ -28,6 +28,11 @@ h1 {
   text-transform: uppercase;
   text-align: center;
   margin: 3rem 0 2rem;
+  animation: fadeUp .5s cubic-bezier(.5,.05,.2,1) both;
+}
+
+img {
+  animation: fadeUp .5s cubic-bezier(.5,.05,.2,1) both;
 }
 
 .cv {
@@ -47,6 +52,7 @@ h1 {
   margin-top: 1.5rem;
   display: flex;
   gap: 1rem;
+  animation: fadeUp .5s cubic-bezier(.5,.05,.2,1) both;
 }
 
 .download {

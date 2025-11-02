@@ -44,9 +44,8 @@
        rgba(255, 255, 255, 0.28)
     );
     position: relative;
-  top: 5rem;  // move downward approx half a dot's height
-  bottom: 1.5rem; // leave space at bottom too
-  height: calc(100% - 10rem); // reduce height by the top+bottom offset combined
+    top: 10%;
+    height: calc(80%);
   }
 
   .left {
@@ -84,6 +83,7 @@
     white-space: nowrap;
     transform: translateY(1.5rem);
     align-self: center;
+    user-select: none;
   }
 
   .card {
@@ -122,8 +122,9 @@
     }
   }
 
-  @media (max-width: 820px) {
-    grid-template-columns: 28px 1fr;
+
+  @media (max-width: $bp-md) {
+    grid-template-columns: 30px 1fr;
     column-gap: 12px;
 
     .rail,
@@ -139,7 +140,7 @@
     }
 
     .date {
-      transform: translateY(-140%);
+      transform: translateY(100%);
     }
   }
 }

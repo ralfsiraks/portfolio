@@ -3,6 +3,8 @@ $dark: #0E0E0E;
 $orange-accent:#ff4c24;
 
 
+
+// ----  Animations  ----
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -24,6 +26,8 @@ $orange-accent:#ff4c24;
     transform: translateY(14px);
   }
 }
+
+// ----  Fonts  ----
 
 @font-face {
   font-family: "PP Neue Montreal";
@@ -66,3 +70,11 @@ $orange-accent:#ff4c24;
   font-weight: 600;
   font-style: italic;
 }
+
+
+// ----  Breakpoints  ----
+$bp-sm: 576px;
+$bp-md: 768px;
+$bp-lg: 992px;
+$bp-xl: 1200px;
+$bp-xxl: 1400px;

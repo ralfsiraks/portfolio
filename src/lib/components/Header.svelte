@@ -12,13 +12,12 @@
 </script>
 
 <header>
+  <div class="logo-container">
+    <a href="/" class="logo-link">
+      <img class="logo" src="/images/eye.png" alt="Logo" />
+    </a>
+  </div>
   <nav>
-    <div>
-      <a href="/" class="logo-link">
-        <img class="logo" src="/images/eye.png" alt="Logo" />
-      </a>
-    </div>
-    <div>
       <ul>
         <li><a class="nav-link" class:is-active={isActive('/')} href="/" onclick={(e) => handleNav(e, '/')}>Home</a></li>
         <li><a class="nav-link" class:is-active={isActive('/about')} href="/about" onclick={(e) => handleNav(e, '/about')}>About me</a></li>
@@ -26,8 +25,9 @@
         <li><a class="nav-link" class:is-active={isActive('/blog')} href="/blog" onclick={(e) => handleNav(e, '/blog')}>Blog</a></li>
         <li><a class="nav-link" class:is-active={isActive('/message')} href="/message" onclick={(e) => handleNav(e, '/message')}>Get In Touch</a></li>
         <li><a class="nav-link" class:is-active={isActive('/contact')} href="/contact" onclick={(e) => handleNav(e, '/contact')}>Contact</a></li>
+        <li><a class="nav-link" class:is-active={isActive('/cv')} href="/cv" onclick={(e) => handleNav(e, '/cv')}>CV</a></li>
+        <li><a class="nav-link" class:is-active={isActive('/faq')} href="/faq" onclick={(e) => handleNav(e, '/faq')}>FAQ</a></li>
       </ul>
-    </div>
   </nav>
 </header>
 
@@ -38,37 +38,49 @@ header {
   top: 0;
   z-index: 100;
   padding: 0.5rem 2rem;
+
+  /* ✅ grid centers the middle column perfectly */
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+
   background: linear-gradient(
-  to bottom,
-  rgba(0, 0, 0, 1) 0%,   /* stronger opacity */
-  rgba(0, 0, 0, 0.70) 70%,  /* start easing out */
-  rgba(0, 0, 0, 0.30) 85%,  /* start easing out */
-  rgba(0, 0, 0, 0.00) 100%  /* fully transparent */
-);
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.70) 70%,
+    rgba(0, 0, 0, 0.30) 85%,
+    rgba(0, 0, 0, 0.00) 100%
+  );
 }
+
 
 .logo {
   height: 50px;
-  width: auto;
   transition: transform .7s cubic-bezier(0.5, 0.05, 0.2, 1);
   user-select: none;
 
   &:hover { cursor: pointer; transform: rotate(180deg); }
 }
 
+.logo-container {
+  grid-column: 1;
+  justify-self: start;   /* stick to the left */
+  width: min-content;
+}
+
 nav {
-  width: 100%;
+  grid-column: 2;        /* dead-center column */
   display: flex;
   align-items: center;
-  gap: 1rem;
 
   ul {
     list-style: none;
     display: flex;
     gap: 3rem;
+    margin: 0;
+    padding: 0;
+    width: min-content;
   }
-
-  div { width: 100%; }
 }
 
 .nav-link {
