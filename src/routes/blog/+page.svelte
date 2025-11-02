@@ -24,7 +24,7 @@ h1 {
   font-weight: 400;
   text-transform: uppercase;
   text-align: center;
-  margin: 3rem 0 1rem;
+  margin: 3rem 0 3rem;
   animation: fadeUp .5s cubic-bezier(.5,.05,.2,1) both;
 }
 

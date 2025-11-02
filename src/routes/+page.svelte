@@ -4,8 +4,10 @@
 </section>
 
 <style lang="scss">
+section {
+ min-height: 100vh;
+}
 .title-text {
-  min-height: 60vh;
   gap: .5rem;
 }
 </style>

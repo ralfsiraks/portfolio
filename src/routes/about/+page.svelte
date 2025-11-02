@@ -8,7 +8,7 @@
   {#each timeline as event, i}
       <div class="dot" style="grid-row: {i + 1};" aria-hidden="true"></div>
       <div class="date" style="grid-row: {i + 1};">{event.period}</div>
-      <div class="card {event.side}" style="grid-row: {i + 1};">
+      <div class="card {event.side}" style="grid-row: {i + 1}; animation-delay: {i * 120}ms;">
         <h3>{event.title}</h3>
         <h4>{event.subtitle}</h4>
         <p>{event.body}</p>
@@ -98,6 +98,7 @@
     padding: 1rem 1.25rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
     animation: fadeUp 0.55s cubic-bezier(0.5, 0.05, 0.2, 1) forwards;
+    animation-fill-mode: both; 
 
     & p {
       margin-top: .5rem;
@@ -118,17 +119,6 @@
       color: #cfcfcf;
       background: #141414;
       list-style: none;
-    }
-  }
-
-  @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(14px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
     }
   }
 
