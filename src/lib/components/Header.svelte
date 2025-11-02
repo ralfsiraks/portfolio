@@ -108,10 +108,8 @@ nav {
   }
 }
 
-
-@media (max-width: $bp-lg) {
   header{
     max-width: 100vw;
+    overflow: hidden;
   }
-}
 </style>
