@@ -52,7 +52,8 @@
 }
 
 .panel {
-  width: min(1200px, 100%);
+  margin: 5rem;
+  max-width: 1200px;
   background: #111;
   color: #eaeaea;
   border: 1px solid #222;
@@ -67,6 +68,13 @@
 
 .fade-out {
   animation-name: fadeDown;
+}
+
+@media (min-width: $bp-md) {
+  .modal .panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 </style>

@@ -69,7 +69,6 @@ h1 {
   margin: 3rem;
 }
 
-/* modal inner layout */
 .hero {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -137,17 +136,15 @@ h1 {
 }
 
 
-/* Respect reduced motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  .card {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
+@media (max-width : $bp-sm) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 }
 
 
-@media (min-width: 900px) {
+
+@media (min-width: $bp-md) {
   :global(.modal .panel) {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -158,5 +155,4 @@ h1 {
     aspect-ratio: unset;
   }
 }
-
 </style>
