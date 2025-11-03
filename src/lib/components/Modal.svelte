@@ -49,6 +49,7 @@
   background: rgba(0, 0, 0, 0.6);
   animation-duration: .4s;
   animation-fill-mode: forwards;
+  height: 100vh;
 }
 
 .panel {
@@ -74,6 +75,12 @@
   .modal .panel {
     display: grid;
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: $bp-sm) {
+  .panel {
+      margin: 2rem;
   }
 }
 
