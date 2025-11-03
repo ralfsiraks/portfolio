@@ -109,14 +109,21 @@ nav.desktop ul { list-style: none; display: flex; gap: 3rem; margin: 0; padding:
 .burger img { width: 28px; height: 28px; display: block; }
 
 @media (max-width: $bp-lg) {
+  header { grid-template-columns: 1fr auto 1fr; }
+
+  nav.desktop { display: none; }
+
   .logo-link {
     grid-column: 2;
-    width: min-content;
     justify-self: center;
   }
-  nav.desktop { display: none; }
-  .burger { display: block; grid-column: 3; }
 
+  /* burger on the right */
+  .burger {
+    display: block;
+    grid-column: 3;
+    justify-self: end;
+  }
 }
 
 /* Drawer */
