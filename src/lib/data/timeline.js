@@ -15,7 +15,7 @@ const timeline = [
       subtitle: 'For 2 months',
       body:
         'Interned at TET, where I learned Angular from scratch and got to know the company culture and the corporate environment in general.',
-      tags: ['Angular', 'GitLab', 'Tet Internal Work Culture']
+      tags: ['Angular', 'GitLab', 'Corporate Work Structure']
     },
     {
       side: 'left',

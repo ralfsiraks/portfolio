@@ -64,7 +64,7 @@
 <div class="container">
     {#if sent}
       <p class="banner success" role="status">
-        Thanks! Your (pretend) message was submitted successfully. ✨
+        Thanks! Your (test) message was submitted successfully. ✨
       </p>
     {/if}
 <form class="contactForm" onsubmit={onSubmit} novalidate>
