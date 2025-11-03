@@ -170,6 +170,7 @@ nav.desktop ul {
   .burger {
     display: block;
     grid-column: 3;
+    align-self: center;
     justify-self: end;
   }
 }
