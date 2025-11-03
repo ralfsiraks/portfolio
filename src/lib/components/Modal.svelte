@@ -49,7 +49,6 @@
   background: rgba(0, 0, 0, 0.6);
   animation-duration: .4s;
   animation-fill-mode: forwards;
-  height: 100vh;
 }
 
 .panel {

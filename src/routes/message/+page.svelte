@@ -294,12 +294,20 @@ textarea:focus {
 }
 
 
-/* mobile */
-@media (max-width: 720px) {
-  .contactForm {
-    grid-template-columns: 1fr;
-    margin: 1.25rem;
-    gap: 1rem;
+@media (max-width: $bp-md) {
+  .contactForm, .banner {
+    width: 70%;
+  }
+
+  textarea {
+    min-width: 100px;
+  }
+}
+
+@media (max-width: $bp-sm) {
+  .actions {
+    flex-direction: column;
+    gap: 0.3rem;
   }
 }
 </style>

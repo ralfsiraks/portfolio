@@ -69,4 +69,11 @@ img {
   transform: translateY(-2px);
   border-color: #444;
 }
+
+@media (max-width: $bp-xsm) {
+  .actions {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
 </style>

@@ -30,7 +30,7 @@ h1 {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 1.25rem;
   max-width: 1100px;
   margin: 0 auto 3rem;
@@ -70,4 +70,10 @@ h3 { margin: 0; font-weight: 600; }
 }
 .post:hover .more { background-size: 100% 1px; }
 
+
+@media (max-width: $bp-sm) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
 </style>
