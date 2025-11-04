@@ -1,24 +1,31 @@
 <script>
   import { page } from '$app/stores';
 
+  // one source of truth for nav items
+  const links = [
+    { href: '/',          label: 'Home' },
+    { href: '/timeline',  label: 'Timeline' },
+    { href: '/projects',  label: 'Projects' },
+    { href: '/blog',      label: 'Blog' },
+    { href: '/message',   label: 'Get in touch' },
+    { href: '/contact',   label: 'Contact' },
+    { href: '/cv',        label: 'CV' },
+    { href: '/faq',       label: 'FAQ' }
+  ];
+
+  // active link helper
   $: path = $page.url.pathname.replace(/\/+$/, '') || '/';
   const isActive = (href) => (href === '/' ? path === '/' : path.startsWith(href));
 
-  let menuOpen = false;        // intent: open/close
-  let drawerVisible = false;   // actually mounted?
-  let closing = false;         // playing slide-out?
+  // mobile drawer state
+  let menuOpen = false;         // intent
+  let drawerVisible = false;    // actually mounted
+  let closing = false;          // playing slide-out?
 
-  // open/close helpers
-  function openMenu() {
-    drawerVisible = true;
-    closing = false;
-    menuOpen = true;
-  }
-  function startClose() {
-    if (!drawerVisible) return;
-    closing = true;            // play slide-out
-    menuOpen = false;
-  }
+  function openMenu() { drawerVisible = true; closing = false; menuOpen = true; }
+  function startClose() { if (!drawerVisible) return; closing = true; menuOpen = false; }
+  const toggleMenu = () => (menuOpen ? startClose() : openMenu());
+  function onDrawerAnimEnd() { if (closing) { drawerVisible = false; closing = false; } }
 
   function handleNav(e, href) {
     if ($page.url.pathname === href) {
@@ -27,38 +34,37 @@
     }
     startClose();
   }
-
-  // burger click
-  const toggleMenu = () => (menuOpen ? startClose() : openMenu());
-
-  // after slide-out ends, unmount
-  function onDrawerAnimEnd() {
-    if (closing) {
-      drawerVisible = false;
-      closing = false;
-    }
-  }
 </script>
 
 <header>
+  <!-- left: logo -->
   <a href="/" class="logo-link" aria-label="Home" onclick={startClose}>
     <img class="logo" src="/images/eye.png" alt="Logo" />
   </a>
 
+  <!-- center: desktop nav -->
   <nav class="desktop">
     <ul>
-      <li><a class="nav-link" class:is-active={isActive('/')} href="/" onclick={(e)=>handleNav(e,'/')}>Home</a></li>
-      <li><a class="nav-link" class:is-active={isActive('/about')} href="/about" onclick={(e)=>handleNav(e,'/about')}>About</a></li>
-      <li><a class="nav-link" class:is-active={isActive('/projects')} href="/projects" onclick={(e)=>handleNav(e,'/projects')}>Projects</a></li>
-      <li><a class="nav-link" class:is-active={isActive('/blog')} href="/blog" onclick={(e)=>handleNav(e,'/blog')}>Blog</a></li>
-      <li><a class="nav-link" class:is-active={isActive('/message')} href="/message" onclick={(e)=>handleNav(e,'/message')}>Get in touch</a></li>
-      <li><a class="nav-link" class:is-active={isActive('/contact')} href="/contact" onclick={(e)=>handleNav(e,'/contact')}>Contact</a></li>
-      <li><a class="nav-link" class:is-active={isActive('/cv')} href="/cv" onclick={(e)=>handleNav(e,'/cv')}>CV</a></li>
-      <li><a class="nav-link" class:is-active={isActive('/faq')} href="/faq" onclick={(e)=>handleNav(e,'/faq')}>FAQ</a></li>
+      {#each links as l}
+        <li>
+          <a
+            class="nav-link"
+            class:is-active={isActive(l.href)}
+            href={l.href}
+            onclick={(e) => handleNav(e, l.href)}
+          >{l.label}</a>
+        </li>
+      {/each}
     </ul>
   </nav>
 
-  <button class="burger" aria-label="Open menu" aria-expanded={menuOpen} onclick={toggleMenu}>
+  <!-- right: burger -->
+  <button
+    class="burger"
+    aria-label="Open menu"
+    aria-expanded={menuOpen}
+    onclick={toggleMenu}
+  >
     <img src="/images/burger.png" alt="" />
   </button>
 </header>
@@ -72,14 +78,15 @@
   >
     <button class="close" aria-label="Close" onclick={startClose}>×</button>
     <ul>
-      <li><a class:is-active={isActive('/')} href="/"         onclick={(e)=>handleNav(e,'/')}>Home</a></li>
-      <li><a class:is-active={isActive('/about')} href="/about"   onclick={(e)=>handleNav(e,'/about')}>About</a></li>
-      <li><a class:is-active={isActive('/projects')} href="/projects" onclick={(e)=>handleNav(e,'/projects')}>Projects</a></li>
-      <li><a class:is-active={isActive('/blog')} href="/blog"     onclick={(e)=>handleNav(e,'/blog')}>Blog</a></li>
-      <li><a class:is-active={isActive('/message')} href="/message" onclick={(e)=>handleNav(e,'/message')}>Get in touch</a></li>
-      <li><a class:is-active={isActive('/contact')} href="/contact" onclick={(e)=>handleNav(e,'/contact')}>Contact</a></li>
-      <li><a class:is-active={isActive('/cv')} href="/cv"       onclick={(e)=>handleNav(e,'/cv')}>CV</a></li>
-      <li><a class:is-active={isActive('/faq')} href="/faq"     onclick={(e)=>handleNav(e,'/faq')}>FAQ</a></li>
+      {#each links as l}
+        <li>
+          <a
+            class:is-active={isActive(l.href)}
+            href={l.href}
+            onclick={(e) => handleNav(e, l.href)}
+          >{l.label}</a>
+        </li>
+      {/each}
     </ul>
   </div>
 {/if}
@@ -94,30 +101,21 @@ header {
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 1rem;
-  background: linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,.7) 70%, rgba(0,0,0,.3) 85%, rgba(0,0,0,0) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,.7) 70%,
+    rgba(0,0,0,.3) 85%,
+    rgba(0,0,0,0) 100%
+  );
 }
 
-.logo {
-  height: 50px;
-  user-select: none;
-  transition: transform .7s cubic-bezier(.5,.05,.2,1);
-}
+.logo { height: 50px; user-select: none; transition: transform .7s cubic-bezier(.5,.05,.2,1); }
+.logo:hover { transform: rotate(180deg); }
 
-.logo:hover {
-  transform: rotate(180deg);
-}
-
-nav.desktop {
-  justify-self: center;
-}
-
-nav.desktop ul {
-  list-style: none;
-  display: flex;
-  gap: 3rem;
-  margin: 0;
-  padding: 0;
-}
+/* desktop nav centered */
+nav.desktop { justify-self: center; }
+nav.desktop ul { list-style: none; display: flex; gap: 3rem; margin: 0; padding: 0; }
 
 .nav-link {
   position: relative;
@@ -133,46 +131,19 @@ nav.desktop ul {
   background-position: 100% 100%;
   transition: background-size .5s cubic-bezier(.8,0,.2,1), background-position 0s;
 }
+.nav-link.is-active,
+.nav-link:hover { background-size: 100% 1px; background-position: 0 100%; }
 
-.nav-link.is-active, .nav-link:hover {
-  background-size: 100% 1px;
-  background-position: 0 100%;
-}
+/* burger button */
+.burger { border: 0; background: transparent; padding: .25rem; cursor: pointer; display: none; }
+.burger img { width: 28px; height: 28px; display: block; }
 
-.burger {
-  border: 0;
-  background: transparent;
-  padding: .25rem;
-  cursor: pointer;
-  display: none;
-}
-
-.burger img {
-  width: 28px;
-  height: 28px;
-  display: block;
-}
-
+/* responsive switch */
 @media (max-width: $bp-lg) {
-  header {
-    grid-template-columns: 1fr auto 1fr;
-  }
-
-  nav.desktop {
-    display: none;
-  }
-
-  .logo-link {
-    grid-column: 2;
-    justify-self: center;
-  }
-
-  .burger {
-    display: block;
-    grid-column: 3;
-    align-self: center;
-    justify-self: end;
-  }
+  header { grid-template-columns: 1fr auto 1fr; }
+  nav.desktop { display: none; }
+  .logo-link { grid-column: 2; justify-self: center; }
+  .burger { display: block; grid-column: 3; align-self: center; justify-self: end; }
 }
 
 /* Drawer */
@@ -185,14 +156,8 @@ nav.desktop ul {
   grid-template-rows: auto 1fr;
   padding: 1rem 1.25rem;
 }
-
-.drawer.slide-in {
-  animation: slideIn .4s cubic-bezier(.4,0,.2,1) forwards;
-}
-
-.drawer.slide-out {
-  animation: slideOut .4s cubic-bezier(.4,0,.2,1) forwards;
-}
+.drawer.slide-in  { animation: slideIn  .4s cubic-bezier(.4,0,.2,1) forwards; }
+.drawer.slide-out { animation: slideOut .4s cubic-bezier(.4,0,.2,1) forwards; }
 
 .drawer .close {
   justify-self: end;
@@ -202,7 +167,6 @@ nav.desktop ul {
   font-size: 2rem;
   cursor: pointer;
 }
-
 .drawer ul {
   list-style: none;
   margin: .5rem 0 0;
@@ -211,7 +175,6 @@ nav.desktop ul {
   gap: .75rem;
   align-content: start;
 }
-
 .drawer a {
   display: block;
   padding: .9rem 1rem;
@@ -223,12 +186,9 @@ nav.desktop ul {
   background: #111;
   transition: transform .3s cubic-bezier(.5,.05,.2,1), border-color .3s ease;
 }
-
-.drawer a:hover, .drawer a.is-active {
-  transform: translateY(-1px);
-  border-color: #2e2e2e;
-}
+.drawer a:hover,
+.drawer a.is-active { transform: translateY(-1px); border-color: #2e2e2e; }
 
 @keyframes slideIn  { from { transform: translateX(100%); } to { transform: translateX(0); } }
-@keyframes slideOut { from { transform: translateX(0); }     to { transform: translateX(100%); } }
+@keyframes slideOut { from { transform: translateX(0); }    to { transform: translateX(100%); } }
 </style>

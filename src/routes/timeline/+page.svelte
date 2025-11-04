@@ -49,6 +49,8 @@
   });
 </script>
 
+<h1>TIMELINE</h1>
+
 <section class="timeline" bind:this={container}>
   <!-- real, absolutely positioned rail -->
   <div class="rail" bind:this={rail} aria-hidden="true"></div>
@@ -71,6 +73,15 @@
 </section>
 
 <style lang="scss">
+h1 {
+  font-size: 3rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 3rem 0 2rem;
+  animation: fadeUp .5s cubic-bezier(.5,.05,.2,1) both;
+}
+
 .timeline {
   position: relative; /* anchor for the rail */
 
