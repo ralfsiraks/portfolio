@@ -1,9 +1,7 @@
 <script>
-  // Edit these to your actual details
   const EMAIL = 'it24075@lbtu.lv';
   const PHONE = '+371 12345678';
   const LOCATION_LABEL = 'Rīga, Latvia';
-  // Get your own embed URL from Google Maps → Share → Embed a map → Copy HTML (take the src)
   const MAP_EMBED =
     'https://www.google.com/maps?q=Riga%2C%20Latvia&output=embed';
 </script>
@@ -50,7 +48,6 @@
 
 <style lang="scss">
 
-/* Page title */
 h1 {
   font-size: 3rem;
   font-weight: 400;
@@ -60,7 +57,6 @@ h1 {
   animation: fadeUp .5s cubic-bezier(.5,.05,.2,1) both;
 }
 
-/* Layout */
 .contact-wrap {
   display: grid;
   grid-template-columns: 1fr 1.1fr;
@@ -70,7 +66,6 @@ h1 {
   padding: 0 1.25rem;
 }
 
-/* Info block */
 .info {
   animation: fadeUp .5s cubic-bezier(.5,.05,.2,1) .06s both;
 }
@@ -134,16 +129,8 @@ a:hover { background-size: 100% 1px; }
   height: 420px;
   border: 0;
   filter: saturate(.95) contrast(1.05);
-  /* optional: rounded corners already handled by container */
 }
 
-/* FadeUp keyframes (or use your global in tokens) */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(14px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* Responsive */
 @media (max-width: 900px) {
   .contact-wrap { grid-template-columns: 1fr; }
   .map-card iframe { height: 360px; }

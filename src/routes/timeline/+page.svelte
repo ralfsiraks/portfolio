@@ -2,8 +2,8 @@
   import timeline from '$lib/data/timeline.js';
   import { onMount } from 'svelte';
 
-  let container; // .timeline
-  let rail;      // .rail
+  let container;
+  let rail;
 
   function positionRail() {
     if (!container || !rail) return;
@@ -83,7 +83,7 @@ h1 {
 }
 
 .timeline {
-  position: relative; /* anchor for the rail */
+  position: relative;
 
   display: grid;
   grid-template-columns: 1fr 56px 1fr; /* left | rail | right */
@@ -98,7 +98,6 @@ h1 {
   /* --- RAIL (absolute; top/height set via JS) --- */
   .rail {
     position: absolute;
-    /* desktop: center on middle column */
     left: 50%;
     transform: translateX(-50%);
 
@@ -189,14 +188,9 @@ h1 {
     }
   }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(14px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
   /* Mobile: 2 columns (gutter/rail | content) */
   @media (max-width: $bp-md) {
-    grid-template-columns: 30px 1fr;  /* gutter (rail ~15px center) | content */
+    grid-template-columns: 30px 1fr;
     column-gap: 12px;
 
     .dot,
@@ -210,7 +204,6 @@ h1 {
 
     .date { transform: translateY(100%); }
 
-    /* pin rail to the gutter center (15px from left) */
     .rail {
       grid-column: 1;
       left: 15px;

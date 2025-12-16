@@ -1,7 +1,6 @@
 <script>
   import { page } from '$app/stores';
 
-  // one source of truth for nav items
   const links = [
     { href: '/',          label: 'Home' },
     { href: '/timeline',  label: 'Timeline' },
@@ -13,14 +12,13 @@
     { href: '/faq',       label: 'FAQ' }
   ];
 
-  // active link helper
   $: path = $page.url.pathname.replace(/\/+$/, '') || '/';
   const isActive = (href) => (href === '/' ? path === '/' : path.startsWith(href));
 
   // mobile drawer state
   let menuOpen = false;         // intent
   let drawerVisible = false;    // actually mounted
-  let closing = false;          // playing slide-out?
+  let closing = false;          // playing slide-off?
 
   function openMenu() { drawerVisible = true; closing = false; menuOpen = true; }
   function startClose() { if (!drawerVisible) return; closing = true; menuOpen = false; }
@@ -69,6 +67,7 @@
   </button>
 </header>
 
+<!-- Burger menu -->
 {#if drawerVisible}
   <div
     class="drawer {closing ? 'slide-out' : 'slide-in'}"
@@ -113,7 +112,6 @@ header {
 .logo { height: 50px; user-select: none; transition: transform .7s cubic-bezier(.5,.05,.2,1); }
 .logo:hover { transform: rotate(180deg); }
 
-/* desktop nav centered */
 nav.desktop { justify-self: center; }
 nav.desktop ul { list-style: none; display: flex; gap: 3rem; margin: 0; padding: 0; }
 
@@ -134,11 +132,9 @@ nav.desktop ul { list-style: none; display: flex; gap: 3rem; margin: 0; padding:
 .nav-link.is-active,
 .nav-link:hover { background-size: 100% 1px; background-position: 0 100%; }
 
-/* burger button */
 .burger { border: 0; background: transparent; padding: .25rem; cursor: pointer; display: none; }
 .burger img { width: 28px; height: 28px; display: block; }
 
-/* responsive switch */
 @media (max-width: $bp-lg) {
   header { grid-template-columns: 1fr auto 1fr; }
   nav.desktop { display: none; }
@@ -146,7 +142,6 @@ nav.desktop ul { list-style: none; display: flex; gap: 3rem; margin: 0; padding:
   .burger { display: block; grid-column: 3; align-self: center; justify-self: end; }
 }
 
-/* Drawer */
 .drawer {
   position: fixed;
   inset: 0;

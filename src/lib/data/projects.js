@@ -24,7 +24,7 @@ const projects = [
     title: 'CS:GO Crypto Server',
     description: 'Landing page for a CS:GO crypto server',
     longDescription:
-      'Single-page marketing site with hero, feature sections, and CTA. Tuned for fast LCP and a strong visual identity.',
+      'Marketing site with hero, feature sections, and CTA. Tuned for fast LCP and a strong visual identity.',
     image: '/images/csgo_landing_project.webp',
     tag: 'Landing Page',
     link: 'https://prakse2023-frontend.vercel.app/'
@@ -44,7 +44,7 @@ const projects = [
     title: 'AlcoCalc',
     description: 'A simple alcohol units calculator',
     longDescription:
-      'Form validation, unit conversions, and responsive layout. Built to practice input UX and accessibility.',
+      'Form validation, unit conversions. Built to practice input UX and accessibility.',
     image: '/images/alcocalc_project.webp',
     tag: 'Tool',
     link: 'https://alkocalc.netlify.app/'

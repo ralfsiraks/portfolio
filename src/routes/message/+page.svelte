@@ -51,7 +51,6 @@
   function onSubmit(e) {
     e.preventDefault();
     if (!validateAll()) return;
-    // Fake send
     sent = true;
       // reset form after “send”
       form = initial();

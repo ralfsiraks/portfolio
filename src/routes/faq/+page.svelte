@@ -7,11 +7,10 @@
     { q:'Do you write anywhere?', a:`Short notes live on the Blog.` }
   ];
 
-  let open = null; // index or null
+  let open = null;
 
   const toggle = (i) => {
     open = open === i ? null : i;
-    // purely class-based; no inline styles
   };
 </script>
 
@@ -48,7 +47,6 @@
 </section>
 
 <style lang="scss">
-/* title styled like your other pages */
 h1 {
   font-size: 3rem;
   font-weight: 400;
@@ -58,7 +56,6 @@ h1 {
   animation: fadeUp .5s cubic-bezier(.5,.05,.2,1) both;
 }
 
-/* container */
 .faq {
   max-width: 860px;
   margin: 0 auto 4rem;
@@ -67,7 +64,6 @@ h1 {
   gap: .85rem;
 }
 
-/* card wrapper with staggered fade-up */
 .item {
   background: #111;
   border: 1px solid #222;
@@ -80,7 +76,6 @@ h1 {
   animation-delay: calc(var(--i, 0) * 80ms);
 }
 
-/* clickable header */
 .accordion {
   all: unset;
   box-sizing: border-box;
@@ -102,16 +97,15 @@ h1 {
   outline-offset: 2px;
 }
 
-/* panel animation with only classes (no inline styles) */
-:root { --panel-max: 600px; } /* raise if answers are longer */
+:root { --panel-max: 600px; }
 
 .panel {
   display: grid;
-  grid-template-rows: 0fr;      /* collapsed height */
-  overflow: hidden;             /* clip contents */
-  opacity: 0;                   /* fade too */
-  padding-block: 0;             /* no vertical padding when closed */
-  padding-inline: 1rem;         /* keep the side padding */
+  grid-template-rows: 0fr;     
+  overflow: hidden;             
+  opacity: 0;                  
+  padding-block: 0;             
+  padding-inline: 1rem;         
   border-top: 1px solid transparent;
 
   transition:
@@ -122,19 +116,13 @@ h1 {
 }
 
 .panel.open {
-  grid-template-rows: 1fr;      /* expands to content's natural height */
+  grid-template-rows: 1fr;   
   opacity: 1;
-  padding-block: .75rem;        /* add vertical padding only when open */
+  padding-block: .75rem;   
   border-top-color: #222;
 }
 
-/* the child that actually grows/shrinks */
 .panel .inner {
   overflow: hidden;
-}
-/* fadeUp used across the site */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(14px); }
-  to   { opacity: 1; transform: translateY(0); }
 }
 </style>
